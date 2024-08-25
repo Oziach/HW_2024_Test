@@ -9,9 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotateSpeed = 10f;
 
     private Rigidbody rb;
+    private BoxCollider boxCollider;
+    
+    private Animator animator;
 
+    const string HOPPING_ANIM_BOOL = "Hopping";
     private void Awake() {
         rb = GetComponent<Rigidbody>();
+        boxCollider = rb.GetComponent<BoxCollider>();
+        animator= rb.GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -24,6 +30,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleAnim();
     }
 
     //movement
@@ -43,5 +50,21 @@ public class Player : MonoBehaviour
         //Doofus smoothly turns.
         Vector3 moveDir = new Vector3(xDir, 0f, zDir);
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+    }
+    
+    bool IsGrounded() { //very primitive grounding check, using physics casts would be too much
+        return rb.position.y - boxCollider.size.y/2 > 0 ;
+    }
+
+    void HandleAnim() {
+
+        // if grounded and moving.
+        if (IsGrounded() && 
+          (Mathf.Abs(rb.velocity.x) > 0 || Mathf.Abs(rb.velocity.z) > 0)) {
+            animator.SetBool(HOPPING_ANIM_BOOL, true);
+        }
+        else {
+            animator.SetBool(HOPPING_ANIM_BOOL, false);
+        }
     }
 }
