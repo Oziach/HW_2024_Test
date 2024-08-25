@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 //growing and shrinking can also be done using animator quite easily,
@@ -11,6 +12,8 @@ public class Pulpit : MonoBehaviour
     private float scaleSpeed;
 
     [SerializeField] private float pulpitDuration = 5f;
+
+    [SerializeField] TextMeshProUGUI timerUI;
 
     enum PulpitState {
         Growing,
@@ -40,8 +43,12 @@ public class Pulpit : MonoBehaviour
             pulpitDuration -= Time.deltaTime;
 
             if (pulpitDuration <= 0) {
+                pulpitDuration = 0;
                 currentState = PulpitState.Shrinking;
+                timerUI.enabled = false;
             }
+
+            timerUI.text = pulpitDuration.ToString("f2");
         }
         //shrink
         else {
@@ -53,7 +60,10 @@ public class Pulpit : MonoBehaviour
         transform.localScale += Vector3.one * scaleSpeed * Time.deltaTime;
         if (transform.localScale.x > 1) { transform.localScale = Vector3.one; }
 
-        if (transform.localScale == Vector3.one) { currentState = PulpitState.Countdown; }
+        if (transform.localScale == Vector3.one) { 
+            currentState = PulpitState.Countdown;
+            timerUI.enabled = true;
+        }
     }
 
     public void Shrink() {
