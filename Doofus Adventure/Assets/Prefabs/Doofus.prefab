@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 5847948841263050554}
   - component: {fileID: 7252507072222206333}
   - component: {fileID: 3123918887538840579}
+  - component: {fileID: 7795509849449422367}
   m_Layer: 0
   m_Name: Doofus
   m_TagString: Untagged
@@ -236,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4d74a82c6d3424fa43e2dea34584a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
   rotateSpeed: 27.5
 --- !u!65 &7252507072222206333
 BoxCollider:
@@ -245,7 +245,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2276206806798688969}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 125501aa0ec96df42bd0971a1a151e2e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -286,3 +286,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &7795509849449422367
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276206806798688969}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a11673ac2688d0042950794a4cf3b818, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

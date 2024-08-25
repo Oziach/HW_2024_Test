@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float moveSpeed = 3f;
+    private float moveSpeed;
     [SerializeField] private float rotateSpeed = 10f;
 
     private Rigidbody rb;
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+ 
     }
 
     // Update is called once per frame
@@ -37,7 +37,9 @@ public class Player : MonoBehaviour
     void HandleMovement() {
 
         Vector2 inputVector = GameInput.Instance.GetMovementInputVector().normalized;
-        
+
+        float moveSpeed = GameData.Instance.GetSpeed(); //can't have it in start coz of download reasons
+
         float xVel = inputVector.x * moveSpeed;
         float zVel = inputVector.y * moveSpeed;
 

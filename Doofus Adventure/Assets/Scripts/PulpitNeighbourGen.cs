@@ -7,11 +7,11 @@ using UnityEngine;
 public class PulpitNeighbourGen : MonoBehaviour
 {
     private Pulpit pulpit;
+    private float generationCountdown;
 
     [SerializeField] GameObject pulpitPrefab; //very very slightly unoptimal, since only 2 puplpits exist at a time.
     [SerializeField] float spawnDistance = 9f;
 
-    [SerializeField] float generationCountdown;
     enum GenerationState {
         Idle,
         Generating,
@@ -26,6 +26,7 @@ public class PulpitNeighbourGen : MonoBehaviour
 
     void Start() {
         currentState = GenerationState.Idle;
+        generationCountdown = GameData.Instance.GetPulpitSpawnTime();
     }
 
     void Update() {
@@ -34,9 +35,7 @@ public class PulpitNeighbourGen : MonoBehaviour
         else if (currentState == GenerationState.Idle) {
 
             generationCountdown -= Time.deltaTime;
-            Debug.Log("cding");
             if (generationCountdown <= 0) {
-                Debug.Log("generating time");
                 currentState = GenerationState.Generating;
             }
 
@@ -44,7 +43,7 @@ public class PulpitNeighbourGen : MonoBehaviour
         /////////////// HARD CODING THIS FOR NOW CHANGE IT LATER//////////////////////////
         else if (currentState == GenerationState.Generating) {
 
-            if (Pulpit.numberOfPulpits >= 2) { return; } //wait in queue
+            if (Pulpit.numberOfPulpits >= 2) { return; } //wait in queue. This is what i gleaned from the demo vid at least.
 
             //once there's only one pulpit left, generate and clear queue
             Vector3 spawnPos = transform.position + (GetRandomDirection() * spawnDistance);

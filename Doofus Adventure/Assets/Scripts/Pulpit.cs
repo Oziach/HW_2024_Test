@@ -15,8 +15,8 @@ public class Pulpit : MonoBehaviour
     [SerializeField] private float scaleDuration; //time for pulpit to grow/shrink
     private float scaleSpeed;
 
-    [SerializeField] private float maxPulpitDuration;
-    private float remainingDuration = 5f;
+    private float maxPulpitDuration;
+    private float currDuration;
  
 
     [SerializeField] TextMeshProUGUI timerUI;
@@ -38,7 +38,8 @@ public class Pulpit : MonoBehaviour
     {
         currentState = PulpitState.Growing;
         scaleSpeed = 1/scaleDuration;
-        remainingDuration = maxPulpitDuration;
+        maxPulpitDuration = GameData.Instance.GetMaxPulpitDestroyTime();
+        currDuration = 0;
 
     }
 
@@ -60,14 +61,13 @@ public class Pulpit : MonoBehaviour
     }
 
     private void Maintain() {
-        remainingDuration -= Time.deltaTime;
+        currDuration += Time.deltaTime;
 
-        if (remainingDuration <= 0) {
-            remainingDuration = 0;
+        if (currDuration >= maxPulpitDuration) {
             currentState = PulpitState.Shrinking;
             timerUI.enabled = false;
         }
-
+        float remainingDuration = maxPulpitDuration - currDuration;
         timerUI.text = remainingDuration.ToString("f2");
     }
 
@@ -98,12 +98,9 @@ public class Pulpit : MonoBehaviour
 
 
     //getters and setters
-    public float GetRemainingDuration() {
-        return remainingDuration;
-    }
 
-    public void SetRemainingDuration(float duration) {
-        remainingDuration = duration;
+    public void SetMaxDuration(float duration) {
+        maxPulpitDuration = duration;
     }
     
 }
