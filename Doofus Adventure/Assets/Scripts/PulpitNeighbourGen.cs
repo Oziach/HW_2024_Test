@@ -40,7 +40,7 @@ public class PulpitNeighbourGen : MonoBehaviour
             }
 
         }
-        /////////////// HARD CODING THIS FOR NOW CHANGE IT LATER//////////////////////////
+
         else if (currentState == GenerationState.Generating) {
 
             if (Pulpit.numberOfPulpits >= 2) { return; } //wait in queue. This is what i gleaned from the demo vid at least.
@@ -48,7 +48,6 @@ public class PulpitNeighbourGen : MonoBehaviour
             //once there's only one pulpit left, generate and clear queue
             Vector3 spawnPos = transform.position + (GetRandomDirection() * spawnDistance);
             GameObject newPulpit = Instantiate(pulpitPrefab, spawnPos, Quaternion.identity, null);
-            //newPulpit.GetComponent<Pulpit>().SetRemainingDuration(10f);
 
             currentState = GenerationState.Generated;
         }

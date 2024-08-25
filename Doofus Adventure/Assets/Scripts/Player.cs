@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
 
     private float moveSpeed;
+    [SerializeField] float moveSpeedMul = 1.5f; //if the speed feels to slow 
+
     [SerializeField] private float rotateSpeed = 10f;
 
     private Rigidbody rb;
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
 
         Vector2 inputVector = GameInput.Instance.GetMovementInputVector().normalized;
 
-        float moveSpeed = GameData.Instance.GetSpeed(); //can't have it in start coz of download reasons
+        float moveSpeed = moveSpeedMul * GameData.Instance.GetSpeed(); //can't have it in start coz of download reasons
 
         float xVel = inputVector.x * moveSpeed;
         float zVel = inputVector.y * moveSpeed;

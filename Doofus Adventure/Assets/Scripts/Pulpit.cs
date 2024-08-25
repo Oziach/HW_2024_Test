@@ -38,7 +38,7 @@ public class Pulpit : MonoBehaviour
     {
         currentState = PulpitState.Growing;
         scaleSpeed = 1/scaleDuration;
-        maxPulpitDuration = GameData.Instance.GetMaxPulpitDestroyTime();
+        maxPulpitDuration = Random.Range(GameData.Instance.GetMinPulpitDestroyTime(), GameData.Instance.GetMaxPulpitDestroyTime());
         currDuration = 0;
 
     }
