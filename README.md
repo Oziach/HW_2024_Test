@@ -4,7 +4,7 @@ https://youtu.be/9Dn_c1bDm9A
 
 <hr>
 
-<h3>Quiuck Gifs c:</h3>
+<h3>Quick Gifs c:</h3>
 
 Gameplay <br>
 <img src = "https://github.com/Oziach/HW_2024_Test/blob/main/Gifs/gameplay.gif">
