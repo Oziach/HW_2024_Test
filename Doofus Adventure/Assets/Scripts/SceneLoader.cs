@@ -21,14 +21,17 @@ public class SceneLoader : MonoBehaviour
     }
 
     public static void LoadGameScene() {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(GAME_SCENE_INDEX);
     }
 
     public static void LoadMainMenuScene() {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(MAIN_MENU_SCENE_INDEX);
     }
 
     public static void QuitGame() {
+        Time.timeScale = 1f;
         Application.Quit();
     }
 }

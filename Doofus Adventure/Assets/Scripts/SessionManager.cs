@@ -7,10 +7,9 @@ public class SessionManager : MonoBehaviour
 {   
     public static SessionManager Instance { get; private set; }
 
-    private float score = 0;
+    private int score = 0;
 
-    [SerializeField] string scoreTextFormat = "Score : ";
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameSceneUI gameSceneUI;
 
     private void Awake() {
         if (Instance) {
@@ -24,7 +23,7 @@ public class SessionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -36,7 +35,10 @@ public class SessionManager : MonoBehaviour
 
 
     public void AddScore() {
-        score++;
-        scoreText.text = scoreTextFormat + score.ToString();
+        gameSceneUI.SetScore(++score);
+    }
+
+    public void PlayerDeath() {
+        gameSceneUI.GameOver();
     }
 }

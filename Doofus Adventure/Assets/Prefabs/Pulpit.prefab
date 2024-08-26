@@ -458,7 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleDuration: 0.1
   timerUI: {fileID: 5045767543785366146}
-  currentState: 1
+  currentState: 0
 --- !u!114 &8132186011134902616
 MonoBehaviour:
   m_ObjectHideFlags: 0

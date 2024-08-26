@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     {
         HandleMovement();
         HandleAnim();
+        HandleDeath();
     }
 
     //movement
@@ -70,5 +71,16 @@ public class Player : MonoBehaviour
         else {
             animator.SetBool(HOPPING_ANIM_BOOL, false);
         }
+    }
+
+    void HandleDeath() {
+        if (!IsGrounded()) {
+            StartCoroutine(DeathCoroutine());
+        }
+    }
+
+    IEnumerator DeathCoroutine() {
+        yield return new WaitForSeconds(1f); //shouldn't hardcode this.
+        SessionManager.Instance.PlayerDeath();
     }
 }

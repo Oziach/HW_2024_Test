@@ -20,6 +20,10 @@ public class MenuFunctionalities : MonoBehaviour
         SceneLoader.LoadGameScene();
     }
 
+    public void QuitToMenu() {
+        SceneLoader.LoadMainMenuScene();
+    }
+
     public void QuitGame() {
         SceneLoader.QuitGame();
     }

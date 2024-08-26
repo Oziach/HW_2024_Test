@@ -21,7 +21,7 @@ public class Pulpit : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI timerUI;
 
-    enum PulpitState {
+    public enum PulpitState {
         Growing,
         Countdown,
         Shrinking
@@ -36,7 +36,6 @@ public class Pulpit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = PulpitState.Growing;
         scaleSpeed = 1/scaleDuration;
         maxPulpitDuration = Random.Range(GameData.Instance.GetMinPulpitDestroyTime(), GameData.Instance.GetMaxPulpitDestroyTime());
         currDuration = 0;
@@ -72,7 +71,11 @@ public class Pulpit : MonoBehaviour
     }
 
     public void Grow() {
+        Debug.Log(transform.localScale);
         transform.localScale += Vector3.one * scaleSpeed * Time.deltaTime;
+        Debug.Log(transform.localScale);
+
+
         if (transform.localScale.x > 1) { transform.localScale = Vector3.one; }
 
         if (transform.localScale == Vector3.one) { 
@@ -96,6 +99,9 @@ public class Pulpit : MonoBehaviour
         numberOfPulpits--;
     }
 
+    private void OnDestroy() {
+        numberOfPulpits--;
+    }
 
     //getters and setters
 
@@ -103,4 +109,7 @@ public class Pulpit : MonoBehaviour
         maxPulpitDuration = duration;
     }
     
+    public void SetState(PulpitState newState) {
+        currentState = newState;
+    }
 }
