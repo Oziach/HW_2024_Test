@@ -6,11 +6,11 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Intance { get; private set; }
     private void Awake() {
-        if(Intance == null) {  
-            Intance = new MusicManager(); 
+        if(Intance == null) {
+            Intance = this;
         }
         else {
-            Intance = this;
+            Destroy(gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
