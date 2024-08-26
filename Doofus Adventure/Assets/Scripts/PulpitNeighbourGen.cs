@@ -12,6 +12,7 @@ public class PulpitNeighbourGen : MonoBehaviour
     [SerializeField] GameObject pulpitPrefab; //very very slightly unoptimal, since only 2 puplpits exist at a time.
     [SerializeField] float spawnDistance = 9f;
 
+    //state machine time.
     enum GenerationState {
         Idle,
         Generating,
@@ -30,6 +31,8 @@ public class PulpitNeighbourGen : MonoBehaviour
     }
 
     void Update() {
+
+
         if (currentState == GenerationState.Generated) { return; }
 
         else if (currentState == GenerationState.Idle) {
@@ -43,15 +46,19 @@ public class PulpitNeighbourGen : MonoBehaviour
 
         else if (currentState == GenerationState.Generating) {
 
-            if (Pulpit.numberOfPulpits >= 2) { return; } //wait in queue. This is what i gleaned from the demo vid at least.
+            //wait in queue. This is what i gleaned from the demo vid at least.
+            if (Pulpit.numberOfPulpits >= 2) { return; } 
+
             GeneratePulpit();
         }
     }
+
 
     private void GeneratePulpit() {
 
         //once there's only one pulpit left, generate and clear queue
         Vector3 spawnPos = transform.position + (GetRandomDirection() * spawnDistance);
+
         GameObject newPulpit = Instantiate(pulpitPrefab, spawnPos, Quaternion.identity, null);
 
         Pulpit pulpit = newPulpit.GetComponent<Pulpit>();

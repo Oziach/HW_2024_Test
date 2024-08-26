@@ -25,18 +25,6 @@ public class GameInput : MonoBehaviour
         playerInputActions.Enable();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public Vector2 GetMovementInputVector() {
         return playerInputActions.Default.Movement.ReadValue<Vector2>();
     }

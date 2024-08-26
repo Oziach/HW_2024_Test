@@ -26,18 +26,7 @@ public class GameData : MonoBehaviour
         }
 
         StartCoroutine(GrabJSON(jsonURL));    
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     IEnumerator GrabJSON(string jsonUrl) {

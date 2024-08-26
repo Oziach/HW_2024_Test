@@ -13,16 +13,6 @@ public class GameSceneUI : MonoBehaviour
 
     [SerializeField] GameObject gameOverUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public void SetScore(int score) {
         scoreText.text = scoreTextFormat + score.ToString();
     }

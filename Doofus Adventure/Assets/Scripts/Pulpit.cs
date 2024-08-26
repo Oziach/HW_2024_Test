@@ -37,7 +37,11 @@ public class Pulpit : MonoBehaviour
     void Start()
     {
         scaleSpeed = 1/scaleDuration;
-        maxPulpitDuration = Random.Range(GameData.Instance.GetMinPulpitDestroyTime(), GameData.Instance.GetMaxPulpitDestroyTime());
+
+        float minDestroyTime = GameData.Instance.GetMinPulpitDestroyTime();
+        float maxDestroyTime = GameData.Instance.GetMaxPulpitDestroyTime();
+        maxPulpitDuration = Random.Range(minDestroyTime, maxDestroyTime);
+
         currDuration = 0;
 
     }
@@ -71,10 +75,8 @@ public class Pulpit : MonoBehaviour
     }
 
     public void Grow() {
-        Debug.Log(transform.localScale);
+  
         transform.localScale += Vector3.one * scaleSpeed * Time.deltaTime;
-        Debug.Log(transform.localScale);
-
 
         if (transform.localScale.x > 1) { transform.localScale = Vector3.one; }
 
@@ -99,8 +101,8 @@ public class Pulpit : MonoBehaviour
         numberOfPulpits--;
     }
 
-    private void OnDestroy() {
-        numberOfPulpits--;
+    private void OnDestroy() { //to handle scene reload.
+        numberOfPulpits--; 
     }
 
     //getters and setters

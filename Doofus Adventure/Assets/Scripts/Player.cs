@@ -7,25 +7,18 @@ public class Player : MonoBehaviour
 
     private float moveSpeed;
     [SerializeField] float moveSpeedMul = 1.5f; //if the speed feels to slow 
-
     [SerializeField] private float rotateSpeed = 10f;
 
     private Rigidbody rb;
     private BoxCollider boxCollider;
-    
     private Animator animator;
 
     const string HOPPING_ANIM_BOOL = "Hopping";
+
     private void Awake() {
         rb = GetComponent<Rigidbody>();
         boxCollider = rb.GetComponent<BoxCollider>();
         animator= rb.GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
- 
     }
 
     // Update is called once per frame
@@ -36,7 +29,6 @@ public class Player : MonoBehaviour
         HandleDeath();
     }
 
-    //movement
     void HandleMovement() {
 
         Vector2 inputVector = GameInput.Instance.GetMovementInputVector().normalized;
@@ -54,18 +46,24 @@ public class Player : MonoBehaviour
 
         //Doofus smoothly turns.
         Vector3 moveDir = new Vector3(xDir, 0f, zDir);
+
+        if (moveDir == Vector3.zero) { return;  }
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
     }
-    
-    bool IsGrounded() { //very primitive grounding check, using physics casts would be too much
+
+    //very primitive grounding check, using physics casts would be too much
+    bool IsGrounded() { 
         return rb.position.y - boxCollider.size.y/2 > 0 ;
     }
 
     void HandleAnim() {
 
         // if grounded and moving.
+        float xSpeed = Mathf.Abs(rb.velocity.x);
+        float zSpeed = Mathf.Abs(rb.velocity.z);
+
         if (IsGrounded() && 
-          (Mathf.Abs(rb.velocity.x) > 0 || Mathf.Abs(rb.velocity.z) > 0)) {
+          (xSpeed > 0 || zSpeed > 0)) {
             animator.SetBool(HOPPING_ANIM_BOOL, true);
         }
         else {
@@ -80,7 +78,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator DeathCoroutine() {
-        yield return new WaitForSeconds(1f); //shouldn't hardcode this.
+        yield return new WaitForSeconds(1f); //shouldn't hardcode this, but...
         SessionManager.Instance.PlayerDeath();
     }
 }
