@@ -1,3 +1,7 @@
+<h4> Play in browser, on itch.io --- </h4>
+https://cozyyak.itch.io/doofus-adventure
+
+<hr>
 
 <h4>Hiya, here's a quick recording/vid </h4> 
 https://youtu.be/9Dn_c1bDm9A
